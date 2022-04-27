@@ -1,0 +1,18 @@
+.flights-filter {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: fit-content;
+  margin: 45px 0 0;
+  padding: 0;
+  border: none;
+}
+
+.flights-filter__description {
+  margin-bottom: 20px;
+  font-weight: bold;
+}
+
+.checkbox-button__input {
+  margin-right: 5px;
+}
