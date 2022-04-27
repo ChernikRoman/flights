@@ -1,0 +1,18 @@
+.flights-price {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: fit-content;
+  margin: 25px 0 0;
+  padding: 0;
+  border: none;
+}
+
+.flights-price__description {
+  font-weight: bold;
+}
+
+.price-place__input {
+  margin-top: 17px;
+  margin-left: 5px;
+}
