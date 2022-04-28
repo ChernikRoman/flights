@@ -1,0 +1,16 @@
+.flights-list {
+  display: flex;
+  gap: 30px;
+  flex-direction: column;
+  flex-grow: 1;
+  padding: 20px 40px;
+  border: 1px solid blue;
+}
+
+.flights-list__show-more-btn {
+  width: 255px;
+  height: 30px;
+  margin: 0 auto;
+  border: 1px solid #000;
+  background-color: #EDEDED;
+}
