@@ -1,0 +1,26 @@
+.ticket__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 7px 15px;
+  background: #0087C9;
+}
+
+.ticket__price-wrapper {
+  text-align: right;
+  width: fit-content;
+  color: #fff;
+}
+
+.ticket__price-wrapper span {
+  font-size: 24px;
+  display: block;
+}
+
+.ticket__submit-btn {
+  border: none;
+  width: 100%;
+  padding: 14px;
+  color: #fff;
+  background: #FFB167;
+}
