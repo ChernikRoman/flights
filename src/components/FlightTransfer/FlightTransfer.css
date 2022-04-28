@@ -1,0 +1,30 @@
+.flight-transfer {
+  display: flex;
+  align-items: center;
+  height: 45px;
+}
+
+.flight-transfer__description {
+  margin: 0 10px;
+  color: #FFB167;
+}
+
+.flight-transfer__description_hidden {
+  display: none;
+}
+
+.flight-transfer::before {
+  content: '';
+  height: 1px;
+  margin-left: 10%;
+  flex-grow: 1;
+  background-color: #a3a3a3;
+}
+
+.flight-transfer::after {
+  content: '';
+  height: 1px;
+  margin-right: 10%;
+  flex-grow: 1;
+  background-color: #a3a3a3;
+}
