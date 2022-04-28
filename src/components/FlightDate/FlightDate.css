@@ -1,0 +1,19 @@
+.flight-date__wrapper {
+  display: flex;
+  align-items: baseline;
+  width:fit-content;
+}
+
+.flight-date__wrapper_reverse {
+  flex-direction: row-reverse;
+}
+
+.flight__time {
+  font-size: 24px;
+  margin: 0 3px;
+}
+
+.flight__date {
+  color: #0087C9;
+  margin: 0 3px;
+}
