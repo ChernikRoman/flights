@@ -1,0 +1,31 @@
+.flight {
+  display: flex;
+  flex-direction: column;
+  border-bottom: 2px solid #005fb8;
+}
+
+.flight:last-of-type {
+  border-bottom: none;
+}
+
+.flight__horizontal-line {
+  margin: 0 8px;
+  height: 1px;
+  background: #acacac;
+  border: none;
+}
+
+.flight__airport {
+  color: #000;
+}
+
+.flight__direction {
+  padding: 15px 20px;
+  color: #0087C9;
+  text-align: left;
+}
+
+.flight__carrier {
+  padding: 0 20px 15px;
+  text-align: start;
+}
