@@ -1,0 +1,14 @@
+.flight-duration {
+  display: inline-block;
+  font-size: 24px;
+}
+
+.flight-duration__time-logo {
+  width: 20px;
+  margin-right: 5px;
+  vertical-align: middle;
+}
+
+.flight-duration span {
+  vertical-align: middle;
+}
