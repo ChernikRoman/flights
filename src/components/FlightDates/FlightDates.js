@@ -2,12 +2,12 @@ import FlightDate from '../FlightDate/FlightDate';
 import FlightDuration from '../FlightDuration/FlightDuration';
 import './FlightDates.css';
 
-export default function FlightDates() {
+export default function FlightDates(props) {
   return(
   <div className="flight-dates">
-    <FlightDate date="2020-08-18T20:40:00" reverse={false}/>
-    <FlightDuration duration={885}/>
-    <FlightDate date="2020-08-18T20:40:00" reverse={true}/>
+    <FlightDate date={props.date.departureDate} reverse={false}/>
+    <FlightDuration duration={props.date.duration}/>
+    <FlightDate date={props.date.arrivalDate} reverse={true}/>
   </div>
   )
 }
