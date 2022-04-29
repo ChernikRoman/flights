@@ -78,6 +78,10 @@ export default class DateConverter {
     this.month = month;
   }
 
+  _addZero(number) {
+    return number < 10 ? '0' + number : number;
+  }
+
   getDate() {
     this._setDay();
     this._setMonth();
@@ -85,6 +89,6 @@ export default class DateConverter {
   }
 
   getTime() {
-    return `${this.date.getHours()}:${this.date.getMinutes()}`
+    return `${this._addZero(this.date.getHours())}:${this._addZero(this.date.getMinutes())}`
   }
 }
