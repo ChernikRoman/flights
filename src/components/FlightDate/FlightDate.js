@@ -9,7 +9,7 @@ export default function FlightDate(props) {
   useEffect(()=>{
     const date = new DateConverter(props.date);
     setDate(date.getDate());
-    setTime(date.getTime())
+    setTime(date.getTime());
   }, [])
 
   return(
