@@ -14,7 +14,7 @@ function App() {
   const [sortedTickets, setSortedTickets] = useState([]);
   const [sortParam, setSortParam] = useState('sortByMinPrice');
   const [renderedTickets, setRenderedTickets] = useState([]);
-  const [quantityTickets, setQuantityTickets] = useState(2);
+  const [quantityTickets, setQuantityTickets] = useState(5);
   const [showButton, setShowButton] = useState(true)
 
   const filterHandler = (param) => {
@@ -36,6 +36,7 @@ function App() {
 
   useEffect(() => {
     setFilteredTickets(filteringFlights(flights, filterParam))
+    if (!showButton) setShowButton(true)
   }, [filterParam])
 
   useEffect(()=>{
