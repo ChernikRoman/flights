@@ -20,8 +20,8 @@ class FlightsApi {
 }
 
 const flightsApi = new FlightsApi({
-  // baseURL: 'https://api.moredomains.nomoredomains.rocks/flights',
-  baseURL: 'http://localhost:3000/flights',
+  baseURL: 'https://api-flights.vercel.app/flights',
+  // baseURL: 'http://localhost:3000/flights',
 });
 
 export default flightsApi;
