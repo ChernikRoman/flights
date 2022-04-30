@@ -1,31 +1,15 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import './FlightsSort.css';
 
 export default function FlightsSort(props) {
-  const sortingFunctions = {
-    sortByMinPrice(a, b) {
-      if(+a.flight.price.total.amount > +b.flight.price.total.amount) return 1;
-      if(+a.flight.price.total.amount === +b.flight.price.total.amount) return 0;
-      if(+a.flight.price.total.amount < +b.flight.price.total.amount) return -1;
-    },
-    sortByMaxPrice(a, b) {
-      if(+a.flight.price.total.amount > +b.flight.price.total.amount) return -1;
-      if(+a.flight.price.total.amount === +b.flight.price.total.amount) return 0;
-      if(+a.flight.price.total.amount < +b.flight.price.total.amount) return 1;
-    },
-    sortByDuration(a, b) {
-      if(a.flight.legs[0].duration + a.flight.legs[1].duration > b.flight.legs[0].duration + b.flight.legs[1].duration) return 1;
-      if(a.flight.legs[0].duration + a.flight.legs[1].duration === b.flight.legs[0].duration + b.flight.legs[1].duration) return 0;
-      if(a.flight.legs[0].duration + a.flight.legs[1].duration < b.flight.legs[0].duration + b.flight.legs[1].duration) return -1;
-    }
-  }
+  const [sortBy, setSortBy] = useState('sortByMinPrice')
 
   function changeFormHandler(evt) {
-    props.onSortHandler({callback:sortingFunctions[evt.target.value]})
+    props.onSortHandler(evt.target.value)
   }
 
   useEffect(()=>{
-    props.onSortHandler({callback:sortingFunctions.sortByMinPrice})
+    props.onSortHandler('sortByMinPrice')
   }, [])
 
   return(

@@ -2,23 +2,26 @@ import { useEffect, useState } from 'react';
 import bestPriceConverter from '../../utils/bestPriceConverter';
 import filteringFlights from '../../utils/filteringFligts';
 import flightsApi from '../../utils/FlightsApi';
+import sortingFlights from '../../utils/sortingFlights';
 import FlightsList from '../FlightsList/FlightsList';
 import FlightsSetting from '../FlightsSetting/FlightsSetting';
 import './App.css';
 
 function App() {
   const [flights, setFlights] = useState([]);
-  const [renderedTickets, setRenderedTickets] = useState([]);
-  const [quantityTickets, setQuantityTickets] = useState(10)
+  const [filteredTickets, setFilteredTickets] = useState([]);
+  const [filterParam, setFilterParam] = useState({});
+  const [sortedTickets, setSortedTickets] = useState([]);
   const [sortParam, setSortParam] = useState('sortByMinPrice');
+  const [renderedTickets, setRenderedTickets] = useState([]);
+  const [quantityTickets, setQuantityTickets] = useState(2)
 
-  const sortHandler = (sortParam) => {
-    setSortParam(sortParam);
+  const filterHandler = (param) => {
+    setFilterParam(param)
   }
 
-  const filterHandler = (filterParam) => {
-    setRenderedTickets(filteringFlights(flights, filterParam).slice(0, quantityTickets))
-    // setSortParam(sortParam)
+  const sortHandler = (param) => {
+    setSortParam(param)
   }
 
   const handleMoreBtnClick = () => {
@@ -27,11 +30,19 @@ function App() {
     // sortHandler(sortParam)
   }
 
+  useEffect(() => {
+    setFilteredTickets(filteringFlights(flights, filterParam))
+  }, [filterParam])
+
   useEffect(()=>{
-    if(renderedTickets.length === 0) return
-    const renderedTicketsCopy = JSON.parse(JSON.stringify(renderedTickets));
-    setRenderedTickets(renderedTicketsCopy.sort(sortParam.callback));
-  }, [sortParam])
+    // if(filteredTickets.length === 0) setRenderedTickets([])
+    setSortedTickets([...sortingFlights(filteredTickets, sortParam)])
+  }, [filteredTickets, sortParam])
+
+  useEffect(()=>{
+    // if(sortedTickets.length === 0) return
+    setRenderedTickets([...sortedTickets].slice(0, quantityTickets))
+  }, [sortedTickets, quantityTickets])
 
   useEffect(() => {
     const cachedFlights = JSON.parse(localStorage.getItem('result'));
@@ -40,23 +51,16 @@ function App() {
         .then((data)=>{
           localStorage.setItem('result', JSON.stringify({ flights: data.result.flights,  bestPrices: bestPriceConverter(data) }));
           setFlights(data.result.flights);
-          // setRenderedTickets(data.result.flights.slice(0, 3));
         })
     } else {
       setFlights(cachedFlights.flights);
-      // setRenderedTickets(cachedFlights.flights.slice(0, 15));
     }
   }, [])
-
-  const qqq = () => {
-    console.log(sortHandler)
-    sortHandler(sortParam)
-  }
 
   return (
     <div className="App">
       <>
-        <FlightsSetting onSortHandler={sortHandler} onFilterHandler={filterHandler} flights={flights}/>
+        <FlightsSetting onFilterHandler={filterHandler} onSortHandler={sortHandler} flights={flights} renderedTickets={renderedTickets}/>
         <FlightsList renderedTickets={renderedTickets} onHandleMoreBtnClick={handleMoreBtnClick}/>
       </>
     </div>

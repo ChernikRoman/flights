@@ -47,7 +47,7 @@ export default function FlightsSetting(props) {
 
   return(
       <article className="flights-setting">
-        <FlightsSort onSortHandler={props.onSortHandler}/>
+        <FlightsSort onSortHandler={props.onSortHandler} renderedTickets={props.renderedTickets}/>
         <form id="flights-setting" onChange={handleChangeForm}>
           <FlightsFilter transferCount={flightsInfo.transferCount}/>
           <FlightsPrice flightsInfo={flightsInfo}/>
