@@ -14,7 +14,8 @@ function App() {
   const [sortedTickets, setSortedTickets] = useState([]);
   const [sortParam, setSortParam] = useState('sortByMinPrice');
   const [renderedTickets, setRenderedTickets] = useState([]);
-  const [quantityTickets, setQuantityTickets] = useState(2)
+  const [quantityTickets, setQuantityTickets] = useState(2);
+  const [showButton, setShowButton] = useState(true)
 
   const filterHandler = (param) => {
     setFilterParam(param)
@@ -25,9 +26,12 @@ function App() {
   }
 
   const handleMoreBtnClick = () => {
-    // setQuantityTickets(quantityTickets + 2)
-    // setRenderedTickets(flights.slice(0, quantityTickets + 2))
-    // sortHandler(sortParam)
+    if(sortedTickets.length > quantityTickets) {
+      setQuantityTickets(quantityTickets + 2)
+      setRenderedTickets(sortedTickets.slice(0, quantityTickets + 2))
+    } else {
+      setShowButton(false)
+    }
   }
 
   useEffect(() => {
@@ -35,12 +39,10 @@ function App() {
   }, [filterParam])
 
   useEffect(()=>{
-    // if(filteredTickets.length === 0) setRenderedTickets([])
     setSortedTickets([...sortingFlights(filteredTickets, sortParam)])
   }, [filteredTickets, sortParam])
 
   useEffect(()=>{
-    // if(sortedTickets.length === 0) return
     setRenderedTickets([...sortedTickets].slice(0, quantityTickets))
   }, [sortedTickets, quantityTickets])
 
@@ -61,7 +63,7 @@ function App() {
     <div className="App">
       <>
         <FlightsSetting onFilterHandler={filterHandler} onSortHandler={sortHandler} flights={flights} renderedTickets={renderedTickets}/>
-        <FlightsList renderedTickets={renderedTickets} onHandleMoreBtnClick={handleMoreBtnClick}/>
+        <FlightsList renderedTickets={renderedTickets} onHandleMoreBtnClick={handleMoreBtnClick} showButton={showButton}/>
       </>
     </div>
   );

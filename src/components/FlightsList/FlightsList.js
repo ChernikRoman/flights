@@ -15,7 +15,7 @@ export default function FlightsList(props) {
           return <Ticket ticket={elm.flight} key={nanoid()}/>
         })
       }
-      <button className="flights-list__show-more-btn" onClick={moreBtnClickHandler}>Показать еще</button>
+      {props.showButton && <button className="flights-list__show-more-btn" onClick={moreBtnClickHandler}>Показать еще</button>}
     </section>
   )
 }
