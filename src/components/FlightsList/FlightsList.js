@@ -1,6 +1,7 @@
 import './FlightsList.css';
 import Ticket from '../Ticket/Ticket';
 import { nanoid } from 'nanoid';
+import Preloader from '../Preloader/Preloader';
 
 export default function FlightsList(props) {
 
@@ -10,6 +11,7 @@ export default function FlightsList(props) {
 
   return(
     <section className="flights-list">
+      {props.showPreloader && <Preloader />}
       {
         props.renderedTickets.map((elm) => {
           return <Ticket ticket={elm.flight} key={nanoid()}/>

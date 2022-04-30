@@ -1,0 +1,28 @@
+@keyframes preloaderAnim {
+  from {
+    transform: rotateY(0);
+  }
+
+  to {
+    transform: rotateY(180deg);
+  }
+}
+
+.preloader {
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  backdrop-filter: blur(3px);
+  width: 100%;
+  height: 100%;
+}
+
+.preloader_hidden {
+  display: none;
+}
+
+.preloader__logo {
+  width: 150px;
+  animation: preloaderAnim 1s linear infinite alternate-reverse;
+}

@@ -15,7 +15,8 @@ function App() {
   const [sortParam, setSortParam] = useState('sortByMinPrice');
   const [renderedTickets, setRenderedTickets] = useState([]);
   const [quantityTickets, setQuantityTickets] = useState(5);
-  const [showButton, setShowButton] = useState(true)
+  const [showButton, setShowButton] = useState(false);
+  const [showPreloader, setShowPreloader] = useState(false);
 
   const filterHandler = (param) => {
     setFilterParam(param)
@@ -50,13 +51,22 @@ function App() {
   useEffect(() => {
     const cachedFlights = JSON.parse(localStorage.getItem('result'));
     if(!cachedFlights) {
+      setShowPreloader(true)
       flightsApi.getFlights()
         .then((data)=>{
           localStorage.setItem('result', JSON.stringify({ flights: data.result.flights,  bestPrices: bestPriceConverter(data) }));
           setFlights(data.result.flights);
+          setShowButton(true)
+          setShowPreloader(false)
+        })
+        .catch(err => {
+          console.log(err)
+          setShowButton(true)
+          setShowPreloader(false)
         })
     } else {
       setFlights(cachedFlights.flights);
+      setShowButton(true)
     }
   }, [])
 
@@ -64,7 +74,12 @@ function App() {
     <div className="App">
       <>
         <FlightsSetting onFilterHandler={filterHandler} onSortHandler={sortHandler} flights={flights} renderedTickets={renderedTickets}/>
-        <FlightsList renderedTickets={renderedTickets} onHandleMoreBtnClick={handleMoreBtnClick} showButton={showButton}/>
+        <FlightsList
+          renderedTickets={renderedTickets}
+          onHandleMoreBtnClick={handleMoreBtnClick}
+          showButton={showButton}
+          showPreloader={showPreloader}
+        />
       </>
     </div>
   );
