@@ -1,4 +1,3 @@
-import { useEffect } from 'react';
 import checkUndefined from '../../utils/checkUndefined';
 import generateCarrierString from '../../utils/generateCarrierString';
 import FlightDates from '../FlightDates/FlightDates';

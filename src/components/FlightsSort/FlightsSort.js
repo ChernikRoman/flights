@@ -34,7 +34,7 @@ export default function FlightsSort(props) {
               Сортровка
           </span>
           <label className="radio-button">
-              <input className="radio-button__input" type="radio" name="flights-sort" value="sortByMinPrice" defaultChecked/>
+              <input className="radio-button__input" type="radio" name="flights-sort" value="sortByMinPrice" defaultChecked={true}/>
               - по возрастанию цены
           </label>
           <label className="radio-button">

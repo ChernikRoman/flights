@@ -4,6 +4,10 @@ import { nanoid } from 'nanoid';
 
 export default function FlightsList(props) {
 
+  const moreBtnClickHandler = () => {
+    props.onHandleMoreBtnClick()
+  }
+
   return(
     <section className="flights-list">
       {
@@ -11,7 +15,7 @@ export default function FlightsList(props) {
           return <Ticket ticket={elm.flight} key={nanoid()}/>
         })
       }
-      <button className="flights-list__show-more-btn">Показать еще</button>
+      <button className="flights-list__show-more-btn" onClick={moreBtnClickHandler}>Показать еще</button>
     </section>
   )
 }
