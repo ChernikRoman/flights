@@ -1,5 +1,4 @@
 export default function filteringFlights(flights, settings) {
-  console.log(settings)
   function filteringByTransfer(elm) {
     let rules = [];
     if(settings.transfer.direct) rules.push(2);
