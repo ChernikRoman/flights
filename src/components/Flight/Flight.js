@@ -17,7 +17,7 @@ export default function Flight(props) {
     departureDate: props.flightInfo.segments[0].departureDate,
     duration: props.flightInfo.duration,
     arrivalDate: props.flightInfo.segments[props.flightInfo.segments.length - 1].arrivalDate,
-    hasTransfer: props.flightInfo.segments.lenght !== 0,
+    transferCount: props.flightInfo.segments.length,
   }
 
   return(
@@ -37,7 +37,7 @@ export default function Flight(props) {
           arrivalDate: flightInfo.arrivalDate,
         }
       }/>
-      <FlightTransfer hasTransfer={flightInfo.hasTransfer}/>
+      <FlightTransfer transferCount={flightInfo.transferCount}/>
       <span className="flight__carrier">Рейс выполняет:
         {generateCarrierString(flightInfo.firstCarrier, flightInfo.secondCarrier)}
       </span>
