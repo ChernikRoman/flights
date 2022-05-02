@@ -16,57 +16,55 @@ function App() {
   const [renderedTickets, setRenderedTickets] = useState([]);
   const [quantityTickets, setQuantityTickets] = useState(5);
   const [showButton, setShowButton] = useState(false);
-  const [showPreloader, setShowPreloader] = useState(false);
+  const [showPreloader, setShowPreloader] = useState(true);
 
   const filterHandler = (param) => {
-    setFilterParam(param)
+    setFilterParam(param);
   }
 
   const sortHandler = (param) => {
-    setSortParam(param)
+    setSortParam(param);
   }
 
   const handleMoreBtnClick = () => {
     if(sortedTickets.length > quantityTickets) {
-      setQuantityTickets(quantityTickets + 2)
-      setRenderedTickets(sortedTickets.slice(0, quantityTickets + 2))
+      setQuantityTickets(quantityTickets + 2);
+      setRenderedTickets(sortedTickets.slice(0, quantityTickets + 2));
     } else {
-      setShowButton(false)
+      setShowButton(false);
     }
   }
 
   useEffect(() => {
-    setFilteredTickets(filteringFlights(flights, filterParam))
-    if (!showButton) setShowButton(true)
+    setFilteredTickets(filteringFlights(flights, filterParam));
+    setQuantityTickets(5);
   }, [filterParam])
 
   useEffect(()=>{
-    setSortedTickets([...sortingFlights(filteredTickets, sortParam)])
-  }, [filteredTickets, sortParam])
+    setSortedTickets([...sortingFlights(filteredTickets, sortParam)]);
+  }, [filteredTickets, sortParam]);
 
   useEffect(()=>{
-    setRenderedTickets([...sortedTickets].slice(0, quantityTickets))
+    setRenderedTickets([...sortedTickets].slice(0, quantityTickets));
+    if (sortedTickets.length !== 0) setShowButton(true);
   }, [sortedTickets, quantityTickets])
 
   useEffect(() => {
     const cachedFlights = JSON.parse(localStorage.getItem('result'));
     if(!cachedFlights) {
-      setShowPreloader(true)
       flightsApi.getFlights()
         .then((data)=>{
           localStorage.setItem('result', JSON.stringify({ flights: data.result.flights,  bestPrices: bestPriceConverter(data) }));
           setFlights(data.result.flights);
-          setShowButton(true)
           setShowPreloader(false)
         })
         .catch(err => {
-          console.log(err)
-          setShowButton(true)
-          setShowPreloader(false)
+          console.log(err);
+          setShowPreloader(false);
         })
     } else {
       setFlights(cachedFlights.flights);
-      setShowButton(true)
+      setShowPreloader(false);
     }
   }, [])
 
