@@ -7,9 +7,9 @@ export default function FlightsCarrier(props) {
             Авиакомпании
         </span>
         {
-          props.carriers === undefined
-          ? <></>
-          : props.carriers.map((elm, index) => {
+          props.carriers !== undefined
+          &&
+          props.carriers.map((elm, index) => {
             return(
               <label className="checkbox-carrier" key={index}>
                 <input className="checkbox-carrier__input" type="checkbox" name="carrier" value={elm.uid} defaultChecked={true} />

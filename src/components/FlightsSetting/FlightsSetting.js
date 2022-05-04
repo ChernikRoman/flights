@@ -11,7 +11,7 @@ export default function FlightsSetting(props) {
   const [minPrice, setMinPrice] = useState(0);
   const [maxPrice, setMaxPrice] = useState(1000000);
   const [carriers, setCarriers] = useState([]);
-  const [flightsInfo, setflightsInfo] = useState({});
+  const [flightsInfo, setFlightsInfo] = useState({});
 
   const handleChangeForm = (evt) => {
     if(evt.target.name === 'transfer') setTransfer({...transfer, [evt.target.value]:evt.target.checked});
@@ -38,7 +38,7 @@ export default function FlightsSetting(props) {
     setMinPrice(flightsInfo.minPrice)
     setMaxPrice(flightsInfo.maxPrice)
     setCarriers(flightsInfo.carriers)
-    setflightsInfo(getFlightsInfo(props.flights))
+    setFlightsInfo(flightsInfo)
   }, [props.flights])
 
   useEffect(()=>{
@@ -47,9 +47,9 @@ export default function FlightsSetting(props) {
 
   return(
       <article className="flights-setting">
-        <FlightsSort onSortHandler={props.onSortHandler} renderedTickets={props.renderedTickets}/>
-        <form id="flights-setting" onChange={handleChangeForm}>
-          <FlightsFilter transferCount={flightsInfo.transferCount}/>
+        <FlightsSort onSortHandler={props.onSortHandler} />
+        <form onChange={handleChangeForm}>
+          <FlightsFilter />
           <FlightsPrice flightsInfo={flightsInfo}/>
           <FlightsCarrier carriers={flightsInfo.carriers} />
         </form>
