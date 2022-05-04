@@ -11,7 +11,6 @@ function App() {
   const [flights, setFlights] = useState([]);
   const [filteredTickets, setFilteredTickets] = useState([]);
   const [filterParam, setFilterParam] = useState({});
-  const [sortedTickets, setSortedTickets] = useState([]);
   const [sortParam, setSortParam] = useState('sortByMinPrice');
   const [renderedTickets, setRenderedTickets] = useState([]);
   const [quantityTickets, setQuantityTickets] = useState(5);
@@ -27,34 +26,35 @@ function App() {
   }
 
   const handleMoreBtnClick = () => {
-    if(sortedTickets.length > quantityTickets) {
+    if(filteredTickets.length > quantityTickets) {
       setQuantityTickets(quantityTickets + 2);
-      setRenderedTickets(sortedTickets.slice(0, quantityTickets + 2));
+      setRenderedTickets(filteredTickets.slice(0, quantityTickets + 2));
     } else {
       setShowButton(false);
     }
   }
 
   useEffect(() => {
-    setFilteredTickets(filteringFlights(flights, filterParam));
+    const filteringTickets = filteringFlights(flights, filterParam);
+    setFilteredTickets(sortingFlights(filteringTickets, sortParam));
     setQuantityTickets(5);
-  }, [filterParam])
+  }, [filterParam, sortParam])
 
   useEffect(()=>{
-    setSortedTickets([...sortingFlights(filteredTickets, sortParam)]);
-  }, [filteredTickets, sortParam]);
-
-  useEffect(()=>{
-    setRenderedTickets([...sortedTickets].slice(0, quantityTickets));
-    if (sortedTickets.length !== 0) setShowButton(true);
-  }, [sortedTickets, quantityTickets])
+    setRenderedTickets([...filteredTickets].slice(0, quantityTickets));
+    if (filteredTickets.length !== 0) {
+      setShowButton(true);
+    } else {
+      setShowButton(false);
+    };
+  }, [filteredTickets, quantityTickets])
 
   useEffect(() => {
     const cachedFlights = JSON.parse(localStorage.getItem('result'));
     if(!cachedFlights) {
       flightsApi.getFlights()
         .then((data)=>{
-          localStorage.setItem('result', JSON.stringify({ flights: data.result.flights,  bestPrices: bestPriceConverter(data) }));
+          localStorage.setItem('result', JSON.stringify({ flights: data.result.flights }));
           setFlights(data.result.flights);
           setShowPreloader(false)
         })
