@@ -1,0 +1,8 @@
+.safari-attention {
+  position: fixed;
+  left: 0;
+  right: 0;
+  padding: 5px;
+  color: #fff;
+  background: #3f3f3f;
+}
