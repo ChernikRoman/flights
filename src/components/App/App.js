@@ -1,10 +1,10 @@
 import { useEffect, useState } from 'react';
-import bestPriceConverter from '../../utils/bestPriceConverter';
 import filteringFlights from '../../utils/filteringFligts';
 import flightsApi from '../../utils/FlightsApi';
 import sortingFlights from '../../utils/sortingFlights';
 import FlightsList from '../FlightsList/FlightsList';
 import FlightsSetting from '../FlightsSetting/FlightsSetting';
+import SafariAttention from '../SafariAttention/SafariAttention';
 import './App.css';
 
 function App() {
@@ -70,6 +70,7 @@ function App() {
 
   return (
     <div className="App">
+      {window.navigator.vendor.includes('Apple') && <SafariAttention />}
       <>
         <FlightsSetting onFilterHandler={filterHandler} onSortHandler={sortHandler} flights={flights} renderedTickets={renderedTickets}/>
         <FlightsList
